@@ -1,0 +1,15 @@
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\bin\Debug\net6.0\MindreArbeten.exe
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\bin\Debug\net6.0\MindreArbeten.deps.json
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\bin\Debug\net6.0\MindreArbeten.runtimeconfig.json
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\bin\Debug\net6.0\MindreArbeten.dll
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\bin\Debug\net6.0\ref\MindreArbeten.dll
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\bin\Debug\net6.0\MindreArbeten.pdb
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\obj\Debug\net6.0\MindreArbeten.csproj.AssemblyReference.cache
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\obj\Debug\net6.0\MindreArbeten.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\obj\Debug\net6.0\MindreArbeten.AssemblyInfoInputs.cache
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\obj\Debug\net6.0\MindreArbeten.AssemblyInfo.cs
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\obj\Debug\net6.0\MindreArbeten.csproj.CoreCompileInputs.cache
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\obj\Debug\net6.0\MindreArbeten.dll
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\obj\Debug\net6.0\ref\MindreArbeten.dll
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\obj\Debug\net6.0\MindreArbeten.pdb
+C:\Users\alcea\OneDrive\Dokument\VS Code\MindreArbeten\obj\Debug\net6.0\MindreArbeten.genruntimeconfig.cache
