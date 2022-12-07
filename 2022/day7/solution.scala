@@ -12,7 +12,7 @@ object Day7:
         val src = Source.fromFile("C:/Users/alcea/coding/aoc/2022/day7/puzzle.txt").getLines.toVector
         var dirCount = -1
         var path = ""
-        var defaultPath = "/"
+        val defaultPath = "/"
 
         def addFileSizes(xs: Vector[String]): Unit = 
             xs.foreach( x => 
@@ -65,7 +65,7 @@ object Day7:
                         path += dir
                     else if dir == defaultPath then
                         path = defaultPath
-                else if dir == ".." then
+                else 
                     if path.lastIndexOf(defaultPath) == 0 then path = defaultPath
                     else path = path.substring(0, path.lastIndexOf(defaultPath))
                 
@@ -94,15 +94,15 @@ object Day7:
                                             addFileSizes(getRows(p3))
                                             
                                             getRows(p3).foreach( r4 =>
-                                                val p4 = s"$p2/${r4.substring(r4.lastIndexOf(" ")).trim()}" 
+                                                val p4 = s"$p3/${r4.substring(r4.lastIndexOf(" ")).trim()}" 
                                                 addFileSizes(getRows(p4)) 
 
                                                 getRows(p4).foreach( r5 => 
-                                                    val p5 = s"$p2/${r5.substring(r5.lastIndexOf(" ")).trim()}" 
+                                                    val p5 = s"$p4/${r5.substring(r5.lastIndexOf(" ")).trim()}" 
                                                     addFileSizes(getRows(p5)) 
 
                                                     getRows(p5).foreach( r6 => 
-                                                        val p6 = s"$p2/${r6.substring(r6.lastIndexOf(" ")).trim()}" 
+                                                        val p6 = s"$p5/${r6.substring(r6.lastIndexOf(" ")).trim()}" 
                                                         addFileSizes(getRows(p6))   
                                                     )
                                                 )
