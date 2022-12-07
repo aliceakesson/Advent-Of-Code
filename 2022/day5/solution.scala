@@ -8,7 +8,7 @@ object Day5:
 
     def part1: Unit = 
         var crates = Vector("NWB", "BMDTPSZL", "RWZHQ", "RZJVDW", "BMHS", "BPVHJNGL", "SLDHFZQJ", "BQGJFSW", "JDCSMWZ").map(_.toVector)
-        val src = Source.fromFile("C:/Users/alcea/coding/aoc22/day5/puzzle.txt").getLines.toVector.drop(10)
+        val src = Source.fromFile("C:/Users/alcea/coding/aoc/2022/day5/puzzle.txt").getLines.toVector.drop(10)
         src.foreach( step =>
             val amount = Integer.parseInt(step.substring(step.indexOf(" ") + 1, step.indexOf(" ", step.indexOf(" ") + 1)).toString)
             val from = Integer.parseInt(step(step.indexOf(" ", step.indexOf(" ") + 1) + 6).toString())
@@ -30,7 +30,7 @@ object Day5:
 
     def part2: Unit = 
         var crates = Vector("NWB", "BMDTPSZL", "RWZHQ", "RZJVDW", "BMHS", "BPVHJNGL", "SLDHFZQJ", "BQGJFSW", "JDCSMWZ").map(_.toVector)
-        val src = Source.fromFile("C:/Users/alcea/coding/aoc22/day5/puzzle.txt").getLines.toVector.drop(10)
+        val src = Source.fromFile("C:/Users/alcea/coding/aoc/2022/day5/puzzle.txt").getLines.toVector.drop(10)
         src.foreach( step =>
             val amount = Integer.parseInt(step.substring(step.indexOf(" ") + 1, step.indexOf(" ", step.indexOf(" ") + 1)).toString)
             val from = Integer.parseInt(step(step.indexOf(" ", step.indexOf(" ") + 1) + 6).toString())

@@ -7,7 +7,7 @@ object Day6:
         part2
 
     def part1: Unit = 
-        val src = Source.fromFile("C:/Users/alcea/coding/aoc22/day6/puzzle.txt").getLines.toVector(0)
+        val src = Source.fromFile("C:/Users/alcea/coding/aoc/2022/day6/puzzle.txt").getLines.toVector(0)
 
         var startIndex = 0
 
@@ -24,7 +24,7 @@ object Day6:
         println(startIndex+4)
 
     def part2: Unit = 
-        val src = Source.fromFile("C:/Users/alcea/coding/aoc22/day6/puzzle.txt").getLines.toVector(0)
+        val src = Source.fromFile("C:/Users/alcea/coding/aoc/2022/day6/puzzle.txt").getLines.toVector(0)
 
         var startIndex = 0
 

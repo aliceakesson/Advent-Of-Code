@@ -8,7 +8,7 @@ object Day3:
 
     def part1: Unit = 
         var sum = 0
-        val src = Source.fromFile("C:/Users/alcea/coding/aoc22/day3/puzzle.txt").getLines.toVector
+        val src = Source.fromFile("C:/Users/alcea/coding/aoc/2022/day3/puzzle.txt").getLines.toVector
         src.foreach( r => 
             val r1 = r.substring(0, r.length()/2)
             val r2 = r.substring(r.length()/2)
@@ -26,7 +26,7 @@ object Day3:
 
     def part2: Unit = 
         var sum = 0
-        val src = Source.fromFile("C:/Users/alcea/coding/aoc22/day3/puzzle.txt").getLines.toVector.grouped(3).toVector
+        val src = Source.fromFile("C:/Users/alcea/coding/aoc/2022/day3/puzzle.txt").getLines.toVector.grouped(3).toVector
         src.foreach( r => 
             var c = 'a'
             r(0).foreach( c1 => 

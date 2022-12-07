@@ -32,7 +32,7 @@ object Day2:
                 case _ => 0
 
 
-        val rounds = Source.fromFile("C:/Users/alcea/coding/aoc22/day2/puzzle.txt").getLines
+        val rounds = Source.fromFile("C:/Users/alcea/coding/aoc/2022/day2/puzzle.txt").getLines
         rounds.foreach( s =>
             val characters = s.mkString(" ").toVector
             points += pointsForwin(characters(0), characters(4))
@@ -65,7 +65,7 @@ object Day2:
                 case _ => 0
 
 
-        val rounds = Source.fromFile("C:/Users/alcea/coding/aoc22/day2/puzzle.txt").getLines
+        val rounds = Source.fromFile("C:/Users/alcea/coding/aoc/2022/day2/puzzle.txt").getLines
         rounds.foreach( s =>
             val characters = s.mkString(" ").toVector
             points += pointsForwin(characters(0), characters(4))
