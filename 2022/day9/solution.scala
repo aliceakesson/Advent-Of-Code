@@ -1,6 +1,6 @@
 import scala.io.Source
 
-object Day8:
+object Day9:
     @main
     def run: Unit =
         part1
