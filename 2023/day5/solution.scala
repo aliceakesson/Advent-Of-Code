@@ -76,11 +76,11 @@ object Day5:
         */
 
         def addValues(source: Vector[(Long, Long)], startRow: Int, endRow: Int): Map[(Long, Long), (Long, Long)] =
-            var xs = Map.empty[(Long, Long), (Long, Long)]
+            var xs: Map[(Long, Long), (Long, Long)] = Map.empty[(Long, Long), (Long, Long)]
 
             def intersection(r1: (Long, Long), r2: (Long, Long)): Option[(Long, Long)] = {
-            val start = Math.max(r1._1, r2._1)
-            val end = Math.min(r1._2, r2._2)
+                val start = Math.max(r1._1, r2._1)
+                val end = Math.min(r1._2, r2._2)
 
                 if (start <= end) {
                     Some((start, end))
@@ -101,6 +101,7 @@ object Day5:
                         current = x2 + 1
                     )
                     if sortedRanges.last(1) < range(1) then gaps = gaps :+ (sortedRanges.last(1) + 1, range(1))
+                else gaps = gaps :+ range
 
                 gaps
             }
@@ -138,11 +139,9 @@ object Day5:
             )
 
             xs
-
+        
         var soils = Map.empty[(Long, Long), (Long, Long)]
         soils = addValues(seeds, 3, 19)
-
-        
 
         var fertilizers =  Map.empty[(Long, Long), (Long, Long)]
         fertilizers = addValues(soils.values.toVector, 22, 47)
@@ -162,8 +161,7 @@ object Day5:
         var locations = Map.empty[(Long, Long), (Long, Long)]
         locations = addValues(humidities.values.toVector, 168, 191)
 
-        println(locations.values.min._2)
-
+        println(locations.values.toVector.sortBy((x, y) => x).filter((x, y) => x > 0).min._1)
 
 
 
