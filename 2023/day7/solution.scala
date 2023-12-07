@@ -47,35 +47,38 @@ object Day7:
         def cti(c: Char): Int = 
             if c.isDigit then (c.toInt - 48)
             else if c.equals('T') then 10
-            else if c.equals('J') then -1
+            else if c.equals('J') then 0
             else if c.equals('Q') then 12
             else if c.equals('K') then 13
             else if c.equals('A') then 14
-            else 0
+            else -1
 
         val orderedCards = src
-                .map(line => (line.split(" ").map(c=>c.trim()).toVector(0).toVector -> line.split(" ").map(c=>c.trim()).toVector(1)))
-                .sortBy(xs => 
-                            val card = xs._1
-                            if card.exists(c => card.forall(d => d.equals(c)) || card.count(_.equals(c)) + card.count(_.equals('J')) >= 5) 
-                                then (7, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4)))
-                            else if card.exists(c => card.count(_.equals(c)) + card.count(_.equals('J')) == 4) then (6, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4)))
-                            else if card.exists(c => card.count(_.equals(c)) + card.count(_.equals('J')) == 2 && card.exists(d => !d.equals(c) && !d.equals('J') && card.count(_.equals(d)) == 3)) || 
-                                    card.exists(c => card.count(_.equals(c)) + card.count(_ .equals('J')) == 3 && card.exists(d => !d.equals(c) && !d.equals('J') && card.count(_.equals(d)) == 2)) 
-                                        then (5, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4)))
-                            else if card.exists(c => card.count(_.equals(c)) + card.count(_.equals('J')) == 3) then (4, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4)))
-                            else if card.exists(c => card.count(_.equals(c)) == 2 && card.count(_.equals('J')) >= 1) || card.count(_.equals('J')) >= 2 
-                                then (3, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4)))
-                            else if card.exists(c => card.count(_.equals(c)) == 2) || card.count(_.equals('J')) >= 1 then (2, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4)))
-                            else (1, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4)))
-                )
+            .map(line => (line.split(" ").map(c=>c.trim()).toVector(0).toVector -> line.split(" ").map(c=>c.trim()).toVector(1)))
+            .sortBy(xs => 
+                val card = xs._1
+                if card.exists(c => card.count(_.equals(c)) + card.count(_.equals('J')) == 5)  || card.count(_.equals('J')) == 5 
+                    then (7, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4))) // five of a kind 
+                else if card.exists(c => card.count(_.equals(c)) + card.count(_.equals('J')) == 4 && !c.equals('J'))
+                    then (6, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4))) // four of a kind
+                else if card.exists(c => card.count(_.equals(c)) + card.count(_.equals('J')) == 2 && card.exists(d => !d.equals(c) && !d.equals('J') && card.count(_.equals(d)) == 3)) || 
+                    card.exists(c => card.count(_.equals(c)) + card.count(_ .equals('J')) == 3 && card.exists(d => !d.equals(c) && !d.equals('J') && card.count(_.equals(d)) == 2)) 
+                        then (5, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4))) // full house
+                else if card.exists(c => card.count(_.equals(c)) + card.count(_.equals('J')) == 3)
+                    then (4, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4))) // three of a kind
+                else if card.exists(c => card.count(_.equals(c)) == 2 && card.count(_.equals('J')) == 1) ||
+                    card.exists(c => card.count(_.equals(c)) == 2 && card.exists(d => !d.equals(c) && card.count(_.equals(d)) == 2))
+                        then (3, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4))) //two pair
+                else if card.exists(c => card.count(_.equals(c)) == 2) || card.count(_.equals('J')) == 1 
+                    then (2, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4))) // one pair
+                else (1, cti(card(0)), cti(card(1)), cti(card(2)), cti(card(3)), cti(card(4))) //high card 
+            )
         
-        var winnings = 0
+        var winnings: Long = 0
 
         for i <- orderedCards.indices do 
             val rank = i + 1
             val value = orderedCards(i)._2.toInt
-            // println(s"rank: $rank, value: $value, card: ${orderedCards(i)}")
             winnings += rank * value
 
         println(winnings)
