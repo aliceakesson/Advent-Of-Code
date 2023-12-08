@@ -48,12 +48,12 @@ object Day8:
 
         var current = nodes.map((a, b, c) => a).filter(_.endsWith("A"))
 
-        var cycleLength = Vector.empty[Long]
+        var cycleLength = Vector.empty[BigInt]
 
         current.foreach(curr => 
             var n = curr
             var found = false
-            var count: Long = 0
+            var count: BigInt = 0
 
             while !found do
                 directions.foreach(dir => 
@@ -66,14 +66,13 @@ object Day8:
                             case 'R' => 
                                 n = node(2)
 
-                        if n.endsWith(("Z")) then found = true else count += 1L
+                        if n.endsWith(("Z")) then found = true else count += 1
                 )
 
-            cycleLength = cycleLength :+ count
+            cycleLength = cycleLength :+ count + 1
         )
         
-        def gcd(a: Long, b: Long): Long = if b == 0 then a else gcd(b, a % b)
-        def lcm(xs: Vector[Long]): Long = xs.reduce((a, b) => a*(b/gcd(a,b)))
+        def gcd(a: BigInt, b: BigInt): BigInt = if b == 0 then a else gcd(b, a % b).abs
+        def lcm(xs: Vector[BigInt]): BigInt = xs.reduce((a, b) => (a * b).abs / gcd(a,b))
 
         println(lcm(cycleLength))
-        println(lcm(Vector(1000000000000L, 2)))
