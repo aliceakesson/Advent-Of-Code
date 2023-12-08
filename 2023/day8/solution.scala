@@ -1,4 +1,5 @@
 import scala.io.Source
+val pathToFolder = "C:/Users/alcea/coding/aoc/"
 
 object Day8:
     @main
@@ -7,7 +8,7 @@ object Day8:
         part2
 
     def part1: Unit = 
-        var src = Source.fromFile("C:/Users/alcea/coding/aoc/2023/day8/puzzle.txt").getLines.toVector
+        var src = Source.fromFile(pathToFolder + "/2023/day8/puzzle.txt").getLines.toVector
 
         val directions = src(0).toVector
         val nodes = src.drop(2)
@@ -36,33 +37,43 @@ object Day8:
 
 
     def part2: Unit =
-        var src = Source.fromFile("C:/Users/alcea/coding/aoc/2023/day8/puzzle.txt").getLines.toVector
+        var src = Source.fromFile(pathToFolder + "/2023/day8/puzzle.txt").getLines.toVector
 
-        val directions = src(0).trim().toVector
-        val nodes = src.drop(2)
+        val directions = src(0).trim().toVector.filter(!_.toString().isEmpty())
 
-        var current = nodes.filter(n => n.split(' ')(0).endsWith("A"))
-        var found = false
+        val nodes = src.drop(2).map(n => 
+            (n.split(' ')(0), 
+            n.substring(n.indexOf("(") + 1, n.indexOf(",")).trim(), 
+            n.substring(n.indexOf(",") + 1, n.indexOf(")")).trim()))
 
-        var count = 0
+        var current = nodes.map((a, b, c) => a).filter(_.endsWith("A"))
 
-        while !found do
-            directions.foreach(dir => 
-                for i <- current.indices do
-                    val node = nodes.filter(n => n.startsWith(current(i)))(0)
+        var cycleLength = Vector.empty[Long]
 
-                    dir match
-                        case 'L' =>
-                            current = current.updated(i, node.substring(node.indexOf("(") + 1, node.indexOf(",")).trim())
-                        case _ => 
-                            current = current.updated(i, node.substring(node.indexOf(",") + 1, node.indexOf(")")).trim())
+        current.foreach(curr => 
+            var n = curr
+            var found = false
+            var count: Long = 0
 
-                count += 1
+            while !found do
+                directions.foreach(dir => 
+                    if !found then
+                        val node = nodes.filter((a, b, c) => a.equals(n))(0)
 
-                if current.forall(n => n.split(' ')(0).endsWith("Z")) then found = true
-                println(current.filter(n => n.split(' ')(0).endsWith("Z")).size)
-            )
+                        dir match
+                            case 'L' =>
+                                n = node(1)
+                            case 'R' => 
+                                n = node(2)
 
-        println(count)
+                        if n.endsWith(("Z")) then found = true else count += 1L
+                )
 
+            cycleLength = cycleLength :+ count
+        )
+        
+        def gcd(a: Long, b: Long): Long = if b == 0 then a else gcd(b, a % b)
+        def lcm(xs: Vector[Long]): Long = xs.reduce((a, b) => a*(b/gcd(a,b)))
 
+        println(lcm(cycleLength))
+        println(lcm(Vector(1000000000000L, 2)))
