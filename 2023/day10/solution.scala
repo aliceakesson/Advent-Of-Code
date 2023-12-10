@@ -9,9 +9,8 @@ object Day10:
         part2
 
     def part1: Unit = 
-        var src = Source.fromFile(pathToFolder + "/2023/day10/example.txt").getLines.toVector
+        var src = Source.fromFile(pathToFolder + "/2023/day10/puzzle.txt").getLines.toVector
 
-        var positions = Set.empty[(Int, Int)]
         var startingPosition = (0, 0)
         val connectMap = Map("n" -> Vector('|', '7', 'F', 'S'),
                              "e" -> Vector('-', 'J', '7', 'S'),
@@ -31,8 +30,6 @@ object Day10:
                 if src(i)(j).equals('S') then 
                     startingPosition = (i, j)
 
-        println(s"start: $startingPosition")
-
         def connectedPipes(i: Int, j: Int): Vector[(Int, Int)] = 
             var result = Vector.empty[(Int, Int)]
             val c = src(i)(j)
@@ -46,57 +43,35 @@ object Day10:
                 then result = result :+ (i, j-1)
             result
 
+        var visited = Set.empty[(Int, Int)]
         var next = connectedPipes(startingPosition._1, startingPosition._2)
         var current = next(0)
+        var count = 1
         while current != startingPosition do 
-            positions += current
+            steps += (current) -> count
+            visited += current
             next = connectedPipes(current._1, current._2)
-            if !positions.contains(next(0)) then current = next(0)
+            if !visited.contains(next(0)) then current = next(0)
             else if next.length == 1 then current = startingPosition
             else current = next(1)
+            count += 1
 
-        var max = 0
-        positions.foreach(p => 
-            // println(s"p: $p")
+        visited = Set.empty[(Int, Int)]
+        visited += startingPosition
+        next = connectedPipes(startingPosition._1, startingPosition._2)
+        current = next(1)
+        count = 1
+        while current != startingPosition do 
+            if !steps.keySet.contains(current) || steps(current) > count then
+                steps += (current) -> count
+            visited += current
+            next = connectedPipes(current._1, current._2)
+            if !visited.contains(next(0)) then current = next(0)
+            else if next.length == 1 then current = startingPosition
+            else current = next(1)
+            count += 1
 
-            var xs = Vector.empty[Int]
-            var steps = 0
-            next = connectedPipes(p._1, p._2)
-            current = next(0)
-            var visited = Set.empty[(Int, Int)]
-            while current != startingPosition do 
-                steps += 1
-                visited += current
-                next = connectedPipes(current._1, current._2)
-                if !visited.contains(next(0)) then current = next(0)
-                else if next.length == 1 then current = startingPosition
-                else current = next(1)
-            xs = xs :+ steps
-
-            next = connectedPipes(p._1, p._2)
-            // println(s"next: $next")
-            if next.length > 1 then
-                steps = 0
-                current = next(1)
-                visited = Set.empty[(Int, Int)]
-                visited += p
-                while current != startingPosition do 
-                    steps += 1
-                    visited += current
-                    next = connectedPipes(current._1, current._2)
-                    if !visited.contains(next(0)) then current = next(0)
-                    else if next.length == 1 then current = startingPosition
-                    else current = next(1)
-                xs = xs :+ steps
-
-            // println(s"xs: $xs")
-
-            if xs.min > max then max = xs.min
-
-        )
-
-        println(max)
-
+        println(steps.values.max)
 
     def part2: Unit =
         var src = Source.fromFile(pathToFolder + "/2023/day10/puzzle.txt").getLines.toVector
