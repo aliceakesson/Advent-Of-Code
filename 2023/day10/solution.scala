@@ -142,7 +142,9 @@ object Day10:
 
         var sum = 0
         pairs.foreach(p => 
-            sum += p._2._2 - p._1._2 - 1   
+            val i = p._1._1
+            for j <- p._1._2+1 until p._2._2 do
+                if !points.contains((i, j)) then sum += 1
         )
         println(sum)
 
