@@ -107,23 +107,22 @@ object Day10:
                 then result = result :+ (i, j-1)
             result
 
-        var points = Set.empty[(Int, Int)]
+        var points = Vector.empty[(Int, Int)]
+        points = points :+ startingPosition
         var next = connectedPipes(startingPosition._1, startingPosition._2)
         var current = next(0)
         while current != startingPosition do 
-            points += current
+            points = points :+ current
             next = connectedPipes(current._1, current._2)
             if !points.contains(next(0)) then current = next(0)
-            else if next.length == 1 then current = startingPosition
+            else if next.length == 1 || next.forall(p=>points.contains(p)) then current = startingPosition
             else current = next(1)
 
-        points += startingPosition
         var stops = points.filterNot((i, j) => 
             j > 0 && j < src(0).length-1 && points.contains((i, j-1)) && points.contains((i, j+1)) 
         )
 
-
-        var pairs = Set.empty[((Int, Int), (Int, Int))]
+        var pairs = Vector.empty[((Int, Int), (Int, Int))]
         for row <- src.indices.filter(x => stops.map((a, b)=>a).contains(x)) do 
             val xs = stops.filter((a, b) => a == row).toVector.sortBy((a, b) => b)
             var start = 0
@@ -135,8 +134,11 @@ object Day10:
             if !noPair then
                 for i <- start until xs.length-1 do 
                     val stop = xs(i)
-                    if pairs.filter((a, b) => b == stop).size == 0 then
-                        pairs += (stop, xs(i+1))
+                    var index = if points.indexOf(stop) < points.length-1 then points.indexOf(stop)+1 else 0
+                    if pairs.filter((a, b) => b == stop).length == 0 
+                    && stop._1 > points(index)._1 && stop._1 < points(points.indexOf(stop)-1)._1 then
+                        pairs = pairs :+ (stop, xs(i+1))
+                        // println(s"stop: $stop, next point: ${points(index)}, pair: ${(stop, xs(i+1))}")
 
         var sum = 0
         pairs.foreach(p => 
