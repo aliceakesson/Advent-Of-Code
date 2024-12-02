@@ -22,30 +22,29 @@ def part2():
 
     for line in f: 
         arr = list(map(lambda y:int(y.replace('\n', '')), filter(lambda x: len(x) > 0, line.split(' '))))
-        
-        differences = []
-        for n in range(1, len(arr)-1):
-            differences.append(arr[n]-arr[n-1])
 
-        def isSafe(diff):
+        def isSafe(a):
+            diff = []
+            for n in range(1, len(a)):
+                diff.append(a[n]-a[n-1])
+
             if all(list(map(lambda x: x >= 1 and x <= 3, diff))) or all(list(map(lambda x: x <= -1 and x >= -3, diff))):
                 return True
             return False
         
-        if isSafe(differences):
+        if isSafe(arr):
             sum += 1
         else:
-            for n in range(0, len(arr)):
-                listcopy = arr.copy()
-                listcopy.remove(arr[n])
+            added = False
+            for elem in arr:
+                if not added:
+                    listcopy = arr.copy()
+                    listcopy.remove(elem)
 
-                differences = []
-                for i in range(1, len(listcopy)):
-                    differences.append(listcopy[i]-listcopy[i-1])
-
-                if isSafe(differences):
-                    sum += 1
-                    break
+                    if isSafe(listcopy):
+                        sum += 1
+                        added = True
+                        break
     
     print(sum)
     
