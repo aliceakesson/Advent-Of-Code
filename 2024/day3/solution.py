@@ -18,15 +18,17 @@ def part2():
 
     result = 0
 
-    def getSumOfLine(string):
-        regex = "mul\(\d+,\d+\)"
-        return sum(list(map(lambda y: int(y[0])*int(y[1]), map(lambda x: re.findall("\d+", x), re.findall(regex, string)))))
-
     for line in f: 
-        regex = "don't\(\)"
+        regex = r"don't\(\).*do\(\)"
+        newLine = re.sub(regex, "", line)
 
-        i = str(list(map(lambda x: re.split("do\(\)", x)[-1], re.split(regex, line))))
-        result += getSumOfLine(i)
+        regex = r"don't\(\).*"
+        newLine = re.sub(regex, "", newLine)
+
+        regex = "mul\(\d+,\d+\)"
+
+        i = sum(list(map(lambda y: int(y[0])*int(y[1]), map(lambda x: re.findall("\d+", x), re.findall(regex, newLine)))))
+        result += i
 
     print(result)
 
