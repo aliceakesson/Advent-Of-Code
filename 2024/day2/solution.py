@@ -36,10 +36,10 @@ def part2():
             sum += 1
         else:
             added = False
-            for elem in arr:
+            for n in range(0, len(arr)):
                 if not added:
                     listcopy = arr.copy()
-                    listcopy.remove(elem)
+                    listcopy.remove(arr[n])
 
                     if isSafe(listcopy):
                         sum += 1
