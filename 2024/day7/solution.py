@@ -35,9 +35,7 @@ def part2():
 
         if not r: # if it's the first time, add the first term in the beginning
             r = str(t.pop(0))
-        # elif eval(s) > p: # for optimization, but seems to be making it slower because of eval()
-        #     return False
-        
+            
         return findSolution(p, t[1:], str(int(r) + t[0])) or findSolution(p, t[1:], str(int(r) * t[0])) or findSolution(p, t[1:], r + str(t[0])) 
 
     for line in f:
