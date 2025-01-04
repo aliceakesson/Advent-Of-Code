@@ -27,11 +27,10 @@ import threading
 def part2():
     f = open("2024/day11/puzzle.txt", "r")
 
-    stones = list(map(lambda x: int(x), f.readlines()[0].split(' ')))
+    stones = list(map(lambda x: int(x), f.readlines().copy()[0].split(' ')))
 
     for stone in enumerate(stones): 
-        t = threading.Thread(target=f, args=stone[1])
-        t.start()
+        threading.Thread(target=f, args=(stone[1],), daemon=True).start()
 
     def f(value):
         vs = [value]
