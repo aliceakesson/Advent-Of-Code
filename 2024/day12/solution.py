@@ -9,6 +9,8 @@ def part1():
 
     neighbors = {}
     plants = {}
+    
+    visited = {}
 
     def areaAndPerimeter(start, c, pos):
         x = pos[0]
@@ -39,7 +41,8 @@ def part1():
 
         return list(sum(x) for x in zip(*[up, down, right, left, (1,0)]))
 
-    def calculate(c, pos):
+    def calculateRegion(pos):
+        c = lines[pos[1]][pos[0]]
         plants[pos] = [pos]
 
         up = areaAndPerimeter(pos, c, move(pos, (0, -1)))
@@ -49,7 +52,16 @@ def part1():
 
         return list(sum(x) for x in zip(*[up, down, right, left, (1,0)]))
 
-    print(calculate('I', (4,0)))
+    # print(calculateRegion((4,0)))
+
+    for i in range(len(lines)):
+        visited[i] = []
+    
+    while visited: 
+        m = min(visited) # minsta index som finns kvar
+        for i in range(len(lines[0])-1):
+            if not i in visited[m]
+        break
 
     print(price) # 1930
 
