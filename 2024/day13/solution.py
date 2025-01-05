@@ -72,31 +72,6 @@ def part2():
 
     price = 0
 
-    # Button A: X+94, Y+34
-    # Button B: X+22, Y+67
-    # Prize: X=8400, Y=5400
-    # 
-    # 94*moveA + 22*moveB = 8400 => moveB = 1/22(8400 - 94*moveA)
-    # 34*moveA + 67*moveB = 5400 = 34*moveA + 67/22*(8400 - 94*moveA) = 
-    #       = 34*moveA + (67*8400)/22 - (67*94)/22*moveA =>
-    #       => (34 - (67*94)/22)*moveA = 5400 - (67*8400)/22 =>
-    #       => moveA = (5400 - (67*8400)/22) / (34 - (67*94)/22)
-    # price = 3*moveA + 1*moveB = 3*(5400 - (67*8400)/22) / (34 - (67*94)/22) + 1/22(8400 - 94*moveA)
-    #
-    # moveA = (y - (by*x)/bx) / (ay - (by*ax)/bx)
-    # moveB = (1/bx) * (x - ax*moveA)
-    #
-    # MINIMERA price !! 
-
-    # 
-    # 94*moveA + 22*moveB = 8400 => moveB = 1/22(8400 - 94*moveA)
-    # 34*moveA + 67*moveB = 5400 => moveB = 1/67(5400 - 34*moveA)
-    #       => 1/22(8400 - 94*moveA) = 1/67(5400 - 34*moveA) =>
-    #       => 8400/22 - (94/22)*moveA = 5400/67 - (34/67)*moveA =>
-    #       => (94/22 - 34/67)*moveA = 8400/22 - 5400/67 =>
-    #       => moveA = (8400/22 - 5400/67) / (94/22 - 34/67)
-    # price = 3*moveA + 1*moveB 
-
     for line in lines:
         ax = int(line[0].split(' ')[2][2:][:-1])
         ay = int(line[0].split(' ')[3][2:][:-1])
