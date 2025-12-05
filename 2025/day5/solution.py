@@ -38,7 +38,6 @@ def part2():
     for i, [start, end] in enumerate(fresh_list):
         sum += end - start + 1
         if i > 0: 
-            first = fresh_list[largest_seen_index][0]
             last = fresh_list[largest_seen_index][1]
             if start <= last and end > last:
                 diff = last - start
