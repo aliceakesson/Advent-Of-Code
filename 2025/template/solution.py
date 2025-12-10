@@ -1,8 +1,8 @@
 def part1():
-    f = open("puzzle.txt", "r")
+    f = open("example.txt", "r")
 
 def part2():
-    f = open("puzzle.txt", "r")
+    f = open("example.txt", "r")
 
     
 part1()
