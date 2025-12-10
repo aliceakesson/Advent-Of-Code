@@ -2,3 +2,4 @@
 - 2022: partly C# but mostly Scala
 - 2023: Scala
 - 2024: Python
+- 2025: Python
